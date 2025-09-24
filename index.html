@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DoorShoppin - Online Shopping</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        :root {
+            --purple-700: #6c5ce7;
+            --purple-600: #7a67ff;
+            --purple-500: #8e79ff;
+            --lavender-100: #f5f2ff;
+            --lavender-200: #efeaff;
+            --coral-500: #ff6a59;
+            --text-dark: #2d2a43;
+            --text-muted: #7b7a92;
+            --bg: #ffffff;
+            --shadow-md: 0 10px 30px rgba(44, 33, 123, 0.12);
+            --shadow-lg: 0 20px 60px rgba(44, 33, 123, 0.18);
+            --radius-lg: 22px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background: var(--lavender-100);
+        }
+
+        /* Shell frame similar to mockup rounded border */
+        .shell {
+            max-width: 1200px;
+            margin: 24px auto;
+            background: var(--bg);
+            border-radius: 28px;
+            box-shadow: var(--shadow-lg);
+            border: 8px solid var(--lavender-200);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 36px;
+            background: linear-gradient(90deg, var(--lavender-200), #ffffff);
+        }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 22px;
+            color: var(--purple-700);
+        }
+        .brand .logo {
+            width: 34px; height: 34px; border-radius: 10px;
+            background: var(--purple-700);
+            display: grid; place-items: center;
+            color: #fff;
+        }
+        .nav {
+            display: flex; align-items: center; gap: 26px;
+        }
+        .nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .btn-get-started {
+            background: var(--coral-500);
+            color: #fff; border: none; text-decoration: none;
+            padding: 10px 18px; border-radius: 999px; font-weight: 700;
+            box-shadow: 0 8px 18px rgba(255, 106, 89, 0.35);
+        }
+
+        /* Hero */
+        .hero {
+            display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px;
+            padding: 50px 36px 70px;
+            position: relative;
+            background: radial-gradient(1200px 500px at 20% 20%, var(--lavender-200), transparent 60%);
+        }
+        .hero::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(800px 400px at 90% 80%, rgba(124,103,255,.15), transparent 70%);
+            pointer-events: none;
+        }
+        .hero-left { display: flex; flex-direction: column; justify-content: center; }
+        .eyebrow { color: var(--purple-600); font-weight: 700; letter-spacing: .1em; font-size: 12px; text-transform: uppercase; margin-bottom: 10px; }
+        .title {
+            font-size: 56px; line-height: 1.05; font-weight: 800; color: var(--text-dark);
+            margin-bottom: 14px;
+        }
+        .lead { color: var(--text-muted); max-width: 520px; margin-bottom: 26px; }
+        .btn-learn-more { background: var(--purple-700); color:#fff; padding: 12px 22px; border-radius: 14px; box-shadow: var(--shadow-md); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; }
+
+        /* Right illustration */
+        .scene { position: relative; display: grid; place-items: center; }
+
+        /* Phone */
+        .phone {
+            width: 320px; height: 560px; border-radius: 30px; background: #12142c; box-shadow: var(--shadow-lg);
+            position: relative; padding: 16px; display: grid; place-items: center;
+        }
+        .phone::before { /* top speaker */
+            content: '';
+            position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+            width: 70px; height: 6px; border-radius: 3px; background: #1f2145;
+        }
+        .screen { width: 100%; height: 100%; border-radius: 22px; background: #ffffff; overflow: hidden; position: relative; }
+
+        /* Awning */
+        .awning {
+            position: absolute; top: 0; left: 0; right: 0; height: 80px;
+            background: repeating-linear-gradient(90deg, #f07474 0 40px, #ffffff 40px 80px, #f07474 80px 120px, #ffffff 120px 160px);
+            border-bottom: 8px solid #e6e6e6;
+        }
+        .awning::after { /* scallops */
+            content: '';
+            position: absolute; bottom: -14px; left: 0; right: 0; height: 28px;
+            background: radial-gradient(circle at 14px -2px, #f07474 16px, transparent 17px),
+                        radial-gradient(circle at 54px -2px, #ffffff 16px, transparent 17px);
+            background-size: 80px 28px; background-repeat: repeat-x;
+        }
+
+        /* Product grid */
+        .products {
+            position: absolute; inset: 110px 18px 18px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+        }
+        .product {
+            background: #f5f5ff; border-radius: 12px; border: 1px solid #ecebff; padding: 14px;
+            display: grid; grid-template-rows: 1fr auto; place-items: center; gap: 8px;
+        }
+        .product i { color: var(--purple-600); font-size: 34px; }
+        .stars { color: #ffb857; font-size: 11px; letter-spacing: 1px; }
+
+        /* Floating checkout card */
+        .checkout {
+            position: absolute; left: -40px; top: 120px; background: #ff9f90; color: #fff; border-radius: 14px; padding: 14px 18px; box-shadow: var(--shadow-md);
+        }
+        .checkout small { display: block; opacity: .9; }
+
+        /* Sale tag */
+        .sale {
+            position: absolute; right: 20px; top: 120px; background: var(--coral-500); color: #fff; padding: 10px 16px 10px 26px; border-radius: 8px 0 0 8px; font-weight: 800; box-shadow: var(--shadow-md);
+        }
+        .sale::before { content: '%'; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); opacity: .9; font-weight: 900; }
+        .sale::after { content: ''; position: absolute; right: -14px; top: 0; width: 0; height: 0; border-left: 14px solid var(--coral-500); border-top: 19px solid transparent; border-bottom: 19px solid transparent; }
+
+        /* Cart */
+        .cart { position: absolute; left: 10px; bottom: 28px; font-size: 40px; color: rgba(108, 99, 231, .5); }
+
+        /* Bags */
+        .bags { position: absolute; right: 0; bottom: 0; display: flex; gap: 12px; align-items: end; padding: 18px; }
+        .bag { width: 80px; height: 90px; background: #8b7dff; border-radius: 8px; position: relative; box-shadow: var(--shadow-md); }
+        .bag.orange { background: #ff8a5c; height: 80px; }
+        .bag::before { content: ''; position: absolute; width: 40px; height: 24px; border: 3px solid rgba(0,0,0,.15); border-bottom: none; border-radius: 20px 20px 0 0; left: 50%; transform: translateX(-50%); top: -18px; }
+
+        /* Responsive */
+        @media (max-width: 990px) {
+            .hero { grid-template-columns: 1fr; padding: 36px 24px 56px; }
+            .title { font-size: 42px; }
+            .shell { margin: 12px; }
+            .checkout { position: absolute; left: -8px; top: 100px; }
+            .sale { right: 10px; top: 100px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <!-- Header -->
+        <header class="header">
+            <div class="brand">
+                <span class="logo"><i class="fa-solid fa-bag-shopping"></i></span>
+                <span>DoorShoppin</span>
+            </div>
+            <nav class="nav">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Work</a>
+                <a href="#">Info</a>
+                <a class="btn-get-started" href="https://doorshoppin.com/Doorshoppin/index.php">Get Started</a>
+            </nav>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-left">
+                <div class="eyebrow">DoorShoppin</div>
+                <h1 class="title">Online<br/>Shopping</h1>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.</p>
+                <a class="btn-learn-more" href="https://doorshoppin.com/Doorshoppin/index.php">
+                    <i class="fa-solid fa-circle-play"></i>
+                    Learn More
+                </a>
+            </div>
+
+            <div class="scene">
+                <div class="phone">
+                    <div class="screen">
+                        <div class="awning"></div>
+                        <div class="products">
+                            <div class="product">
+                                <i class="fa-solid fa-shirt"></i>
+                                <div class="stars">★★★★★</div>
+                            </div>
+                            <div class="product">
+                                <i class="fa-solid fa-person-walking"></i>
+                                <div class="stars">★★★★☆</div>
+                            </div>
+                            <div class="product">
+                                <i class="fa-solid fa-shirt"></i>
+                                <div class="stars">★★★★★</div>
+                            </div>
+                            <div class="product">
+                                <i class="fa-solid fa-person-walking"></i>
+                                <div class="stars">★★★★☆</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout">
+                    <small>Checkout</small>
+                    **** **** **** 1234
+                </div>
+
+                <div class="sale">SALE</div>
+                <i class="fa-solid fa-cart-shopping cart"></i>
+
+                <div class="bags">
+                    <div class="bag"></div>
+                    <div class="bag orange"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
+
